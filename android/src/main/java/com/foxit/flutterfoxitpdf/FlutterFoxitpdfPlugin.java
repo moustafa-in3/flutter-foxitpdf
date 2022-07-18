@@ -25,7 +25,7 @@ public class FlutterfoxitpdfPlugin implements FlutterPlugin, MethodCallHandler, 
   // private ActivityPluginBinding _activityBinding;
   private Activity mActivity;
   private MethodChannel channel;
-  private int errorCode = Constants.e_ErrUnknown;
+  private int errorCode = Constants.e_ErrSuccess;
 
 
   @Override
@@ -76,8 +76,12 @@ public class FlutterfoxitpdfPlugin implements FlutterPlugin, MethodCallHandler, 
   private void initialize(MethodCall call, Result result) {
     String sn = call.argument("sn");
     String key = call.argument("key");
-    errorCode = Library.initialize(sn, key);
-    result.success(errorCode);
+    int errorCode = Library.initialize(sn, key);
+    if (errorCode != Constants.e_ErrSuccess) {
+      result.error("initialize", "initialize failed", errorCode);
+    } else {
+      result.success(errorCode);
+    }
   }
 
   private void openDocument(MethodCall call, Result result) {

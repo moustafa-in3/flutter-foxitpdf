@@ -19,6 +19,8 @@ import com.foxit.uiextensions.UIExtensionsManager;
 import com.foxit.uiextensions.utils.ActManager;
 import com.foxit.uiextensions.utils.AppTheme;
 import com.foxit.uiextensions.utils.UIToast;
+import com.foxit.uiextensions.config.Config;
+import java.io.InputStream;
 
 public class PDFReaderActivity extends FragmentActivity {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -35,9 +37,13 @@ public class PDFReaderActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         AppTheme.setThemeFullScreen(this);
         ActManager.getInstance().setCurrentActivity(this);
-
         pdfViewCtrl = new PDFViewCtrl(getApplicationContext());
-        uiextensionsManager = new UIExtensionsManager(this, pdfViewCtrl, null);
+
+        // Get the config file, and set it to UIExtensionsManager.
+        InputStream stream = this.getApplicationContext().getResources().openRawResource(R.raw.uiextensions_config);
+        Config config = new Config(stream);
+
+        uiextensionsManager = new UIExtensionsManager(this, pdfViewCtrl,config);
         uiextensionsManager.setAttachedActivity(this);
         pdfViewCtrl.setUIExtensionsManager(uiextensionsManager);
         pdfViewCtrl.setAttachedActivity(this);
