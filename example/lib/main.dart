@@ -1,19 +1,23 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_foxitpdf/flutter_foxitpdf.dart';
+import 'package:file_picker/file_picker.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
+  final _flutterfoxitpdfPlugin = Flutterfoxitpdf();
   String _platformVersion = 'Unknown';
   int _error = -1;
 
@@ -27,8 +31,7 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
 
     init(_sn, _key);
-
-    openDocument(_path, '');
+    openDocument();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -36,7 +39,8 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await FlutterFoxitpdf.platformVersion;
+      platformVersion = await _flutterfoxitpdfPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -66,18 +70,24 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> init(String sn, String key) async {
-    int error;
+    int? error;
     try {
-      error = await FlutterFoxitpdf.initialize(sn, key);
+      error = await _flutterfoxitpdfPlugin.initialize(sn, key);
     } on PlatformException {
       error = -1;
     }
     setState(() {
-      _error = error;
+      if (error != null) {
+        _error = error;
+      }
     });
   }
 
-  Future<void> openDocument(String path, String password) async {
-    await FlutterFoxitpdf.openDocument(path, password);
+  Future<void> openDocument() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      String path = result.files.first.path as String;
+      await _flutterfoxitpdfPlugin.openDocument(path, '');
+    }
   }
 }
