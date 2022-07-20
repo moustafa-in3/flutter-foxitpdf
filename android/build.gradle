@@ -40,8 +40,4 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation(name: 'FoxitRDK', ext: 'aar')
     implementation(name: 'FoxitRDKUIExtensions', ext: 'aar')
-    implementation(name: 'RMSSDK-4.2-release', ext: 'aar')
-    implementation(name: 'rms-sdk-ui', ext: 'aar')
-    implementation(name: 'FoxitMobileScanningRDK', ext: 'aar')
-    implementation(name: 'FoxitPDFScan-UI', ext: 'aar')
 }
