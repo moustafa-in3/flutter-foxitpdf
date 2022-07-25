@@ -1,0 +1,6 @@
+framework module uiextensionsDynamic {
+  umbrella header "uiextensionsDynamic.h"
+
+  export *
+  module * { export * }
+}
