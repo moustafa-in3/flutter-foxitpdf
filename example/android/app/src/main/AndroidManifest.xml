@@ -3,6 +3,7 @@
     package="com.foxit.flutterfoxitpdfexample">
    <application
         android:label="flutterfoxitpdfexample"
+        android:largeHeap="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         tools:replace="android:label">
