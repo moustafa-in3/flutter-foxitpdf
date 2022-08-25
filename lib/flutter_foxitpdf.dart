@@ -1,15 +1,28 @@
-import 'flutterfoxitpdf_platform_interface.dart';
+import 'dart:async';
+import 'dart:typed_data';
 
-class Flutterfoxitpdf {
-  Future<String?> getPlatformVersion() {
-    return FlutterfoxitpdfPlatform.instance.getPlatformVersion();
+import 'package:flutter/services.dart';
+
+class FlutterFoxitpdf {
+  static const MethodChannel _channel = const MethodChannel('flutter_foxitpdf');
+
+  static Future<String> get platformVersion async {
+    final String version = await _channel.invokeMethod('getPlatformVersion');
+    return version;
   }
 
-  Future<int?> initialize(String sn, String key) {
-    return FlutterfoxitpdfPlatform.instance.initialize(sn, key);
+  static Future<int> initialize(String sn, String key) async {
+    final int error = await _channel.invokeMethod("initialize", {
+      "sn": sn,
+      "key": key,
+    });
+    return error;
   }
 
-  Future<void> openDocument(String path, String password) {
-    return FlutterfoxitpdfPlatform.instance.openDocument(path, password);
+  static Future<void> openDocument(String path, String password) async {
+    _channel.invokeMethod('openDocument', {
+      'path': path,
+      'password': password,
+    });
   }
 }

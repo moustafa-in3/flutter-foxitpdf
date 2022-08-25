@@ -48,6 +48,7 @@ public class PDFReaderActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         AppTheme.setThemeFullScreen(this);
         ActManager.getInstance().setCurrentActivity(this);
+        AppStorageManager.setOpenTreeRequestCode(REQUEST_OPEN_DOCUMENT_TREE);
 
         pdfViewCtrl = new PDFViewCtrl(getApplicationContext());
 

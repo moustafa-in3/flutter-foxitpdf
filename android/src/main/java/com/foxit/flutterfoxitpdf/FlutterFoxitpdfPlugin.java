@@ -30,7 +30,7 @@ public class FlutterFoxitpdfPlugin implements FlutterPlugin, MethodCallHandler, 
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-    channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "flutterfoxitpdf");
+    channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "flutter_foxitpdf");
     channel.setMethodCallHandler(this);
 
   }
