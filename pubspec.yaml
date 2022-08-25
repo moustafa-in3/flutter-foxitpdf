@@ -36,9 +36,9 @@ flutter:
     platforms:
       android:
         package: com.foxit.flutterfoxitpdf
-        pluginClass: FlutterfoxitpdfPlugin
+        pluginClass: FlutterFoxitpdfPlugin
       ios:
-        pluginClass: FlutterfoxitpdfPlugin
+        pluginClass: FlutterFoxitpdfPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

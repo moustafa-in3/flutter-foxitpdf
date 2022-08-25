@@ -21,9 +21,9 @@ public final class GeneratedPluginRegistrant {
       Log.e(TAG, "Error registering plugin file_picker, com.mr.flutter.plugin.filepicker.FilePickerPlugin", e);
     }
     try {
-      flutterEngine.getPlugins().add(new com.foxit.flutterfoxitpdf.FlutterfoxitpdfPlugin());
+      flutterEngine.getPlugins().add(new com.foxit.flutterfoxitpdf.FlutterFoxitpdfPlugin());
     } catch(Exception e) {
-      Log.e(TAG, "Error registering plugin flutter_foxitpdf, com.foxit.flutterfoxitpdf.FlutterfoxitpdfPlugin", e);
+      Log.e(TAG, "Error registering plugin flutter_foxitpdf, com.foxit.flutterfoxitpdf.FlutterFoxitpdfPlugin", e);
     }
     try {
       flutterEngine.getPlugins().add(new io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin());
